@@ -43,6 +43,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.1.1'
     implementation 'com.firebaseui:firebase-ui-firestore:5.0.0'
 
+    // Google places api
+    implementation 'com.google.android.libraries.places:places:2.0.0'
+
+
+
 
 
     // an alternative to picasso

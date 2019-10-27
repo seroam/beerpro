@@ -39,6 +39,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
+
+
         if (currentUser == null) {
             Log.i(TAG, "No user found, redirect to Login screen");
             List<AuthUI.IdpConfig> providers = Arrays.asList(new AuthUI.IdpConfig.GoogleBuilder().build());

@@ -11,9 +11,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.libraries.places.api.Places;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +37,7 @@ import ch.beerpro.presentation.utils.ViewPagerAdapter;
 public class MainActivity extends AppCompatActivity
         implements BeerCategoriesFragment.OnItemSelectedListener, BeerManufacturersFragment.OnItemSelectedListener {
 
+    private static final String PLACES_API_KEY = "AIzaSyAkTuWEyt4zP0aR-IZIWnvDWBm3cFaCjhc";
     /**
      * We use ButterKnife's view injection instead of having to call findViewById repeatedly.
      */
@@ -50,6 +53,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        //Initialize Places SDK
+        Places.initialize(getApplicationContext(), PLACES_API_KEY);
+        PlacesClient placesClient = Places.createClient(this);
 
         /*
          * The following ceremony is need to have the app logo set as the home button.
