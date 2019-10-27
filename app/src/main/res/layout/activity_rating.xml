@@ -164,35 +164,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/separator5">
 
-                <Button
-                    android:id="@+id/buttonAddPlace2"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/ic_more_horiz_black_24dp"
-                    android:drawableTint="@android:color/darker_gray"
-                    android:text="Ort Hinzufügen"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="10sp" />
-                <!--
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="#ffeeeeee" />
-
-                                <Button
-                                    android:id="@+id/button3"
-                                    style="?android:attr/borderlessButtonStyle"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:drawableTop="@drawable/ic_bookmark_brown_24dp"
-                                    android:drawableTint="@android:color/darker_gray"
-                                    android:text="Wunschliste"
-                                    android:textColor="@android:color/darker_gray"
-                                    android:textSize="10sp" />
-                -->
+                <FrameLayout
+                    android:id="@+id/fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
 

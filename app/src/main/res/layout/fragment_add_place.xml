@@ -17,14 +17,14 @@
         app:layout_constraintTop_toBottomOf="@+id/separator5">
 
         <Button
-            android:id="@+id/buttonAddPlace"
+            android:id="@+id/buttonAddPlace2"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_more_horiz_black_24dp"
             android:drawableTint="@android:color/darker_gray"
-            android:text="Ort Hinzufügen"
+            android:text="Ort Hinzufügen2"
             android:textColor="@android:color/darker_gray"
             android:textSize="10sp" />
     </LinearLayout>

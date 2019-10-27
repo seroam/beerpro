@@ -1,5 +1,7 @@
 package ch.beerpro.presentation.details.createrating;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -73,8 +75,8 @@ public class CreateRatingActivity extends AppCompatActivity implements PlaceFrag
     @BindView(R.id.photoExplanation)
     TextView photoExplanation;
 
-    @BindView(R.id.buttonAddPlace)
-    Button addPlace;
+    //@BindView(R.id.buttonAddPlace)
+    //Button addPlace;
 
     private CreateRatingViewModel model;
 
@@ -97,6 +99,13 @@ public class CreateRatingActivity extends AppCompatActivity implements PlaceFrag
 
         addRatingBar.setRating(rating);
 
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        PlaceFragment fragment = new PlaceFragment();
+        fragmentTransaction.add(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+
         int permissionCheck =
                 ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
@@ -118,12 +127,12 @@ public class CreateRatingActivity extends AppCompatActivity implements PlaceFrag
         });
 
         //Set listener for add place button click
-        addPlace.setOnClickListener(view -> {
+        /*addPlace.setOnClickListener(view -> {
             List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
 
             Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields).build(this);
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
-        });
+        });*/
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
