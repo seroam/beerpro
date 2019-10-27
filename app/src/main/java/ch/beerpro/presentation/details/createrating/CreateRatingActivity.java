@@ -5,13 +5,11 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -30,13 +28,11 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,7 +46,7 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 import pl.tajchert.nammu.Nammu;
 import pl.tajchert.nammu.PermissionCallback;
 
-public class CreateRatingActivity extends AppCompatActivity implements PlaceFragment.OnFragmentInteractionListener {
+public class CreateRatingActivity extends AppCompatActivity implements AddPlaceFragment.OnFragmentInteractionListener {
 
     public static final String ITEM = "item";
     public static final String RATING = "rating";
@@ -102,7 +98,7 @@ public class CreateRatingActivity extends AppCompatActivity implements PlaceFrag
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        PlaceFragment fragment = new PlaceFragment();
+        AddPlaceFragment fragment = new AddPlaceFragment();
         fragmentTransaction.add(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
 

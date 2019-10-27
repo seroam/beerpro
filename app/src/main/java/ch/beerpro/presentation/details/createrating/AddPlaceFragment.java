@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,40 +15,19 @@ import android.widget.Button;
 import butterknife.BindView;
 import ch.beerpro.R;
 
-//import androidx.fragment.app.Fragment;
+public class AddPlaceFragment extends Fragment implements View.OnClickListener {
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PlaceFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PlaceFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PlaceFragment extends Fragment {
+    private static final String TAG = "AddPlaceFragment";
+    View view;
 
-    private static final String TAG = "PlaceFragment";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    @BindView(R.id.buttonAddPlace2)
+    @BindView(R.id.buttonAddPlace)
     Button addPlace;
 
     private static final int AUTOCOMPLETE_REQUEST_CODE = 1337;
     private OnFragmentInteractionListener mListener;
 
-    public PlaceFragment() {
+    public AddPlaceFragment() {
         // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static PlaceFragment newInstance(String param1, String param2) {
-        PlaceFragment fragment = new PlaceFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -59,7 +39,10 @@ public class PlaceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_place, container, false);
+        view = inflater.inflate(R.layout.fragment_add_place, container, false);
+        addPlace = view.findViewById(R.id.buttonAddPlace);
+        addPlace.setOnClickListener(this);
+        return view;
     }
 
     @Override
@@ -77,6 +60,11 @@ public class PlaceFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Log.e(TAG, "button clicked");
     }
 
     /**

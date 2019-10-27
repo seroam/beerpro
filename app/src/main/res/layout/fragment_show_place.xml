@@ -16,16 +16,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/separator5">
 
-        <Button
-            android:id="@+id/buttonAddPlace"
-            style="?android:attr/borderlessButtonStyle"
+        <TextView
+            android:id="@+id/place_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/ic_more_horiz_black_24dp"
-            android:drawableTint="@android:color/darker_gray"
-            android:text="Ort Hinzufügen"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="10sp" />
+            android:text="Place name" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
