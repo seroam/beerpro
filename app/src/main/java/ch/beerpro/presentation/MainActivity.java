@@ -37,7 +37,6 @@ import ch.beerpro.presentation.utils.ViewPagerAdapter;
 public class MainActivity extends AppCompatActivity
         implements BeerCategoriesFragment.OnItemSelectedListener, BeerManufacturersFragment.OnItemSelectedListener {
 
-    private static final String PLACES_API_KEY = "AIzaSyAkTuWEyt4zP0aR-IZIWnvDWBm3cFaCjhc";
     /**
      * We use ButterKnife's view injection instead of having to call findViewById repeatedly.
      */
@@ -53,10 +52,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        //Initialize Places SDK
-        Places.initialize(getApplicationContext(), PLACES_API_KEY);
-        PlacesClient placesClient = Places.createClient(this);
 
         /*
          * The following ceremony is need to have the app logo set as the home button.

@@ -2,7 +2,6 @@ package ch.beerpro.presentation.details.createrating;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,11 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
-
 import butterknife.BindView;
 import ch.beerpro.R;
 
-public class AddPlaceFragment extends Fragment implements View.OnClickListener {
+public class AddPlaceFragment extends Fragment{
 
     private static final String TAG = "AddPlaceFragment";
     View view;
@@ -24,7 +22,7 @@ public class AddPlaceFragment extends Fragment implements View.OnClickListener {
     Button addPlace;
 
     private static final int AUTOCOMPLETE_REQUEST_CODE = 1337;
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener activity;
 
     public AddPlaceFragment() {
         // Required empty public constructor
@@ -41,7 +39,7 @@ public class AddPlaceFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_place, container, false);
         addPlace = view.findViewById(R.id.buttonAddPlace);
-        addPlace.setOnClickListener(this);
+        addPlace.setOnClickListener(v -> activity.displayPlaceSelector());
         return view;
     }
 
@@ -49,7 +47,7 @@ public class AddPlaceFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+            activity = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -59,13 +57,10 @@ public class AddPlaceFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        activity = null;
     }
 
-    @Override
-    public void onClick(View view) {
-        Log.e(TAG, "button clicked");
-    }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -78,7 +73,6 @@ public class AddPlaceFragment extends Fragment implements View.OnClickListener {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void displayPlaceSelector();
     }
 }

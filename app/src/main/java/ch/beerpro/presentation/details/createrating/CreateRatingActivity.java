@@ -25,14 +25,18 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.common.api.Status;
+import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,6 +55,8 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     public static final String ITEM = "item";
     public static final String RATING = "rating";
     private static final String TAG = "CreateRatingActivity";
+
+    private static final String PLACES_API_KEY = "AIzaSyAkTuWEyt4zP0aR-IZIWnvDWBm3cFaCjhc";
 
     private static final int AUTOCOMPLETE_REQUEST_CODE = 1337;
     @BindView(R.id.toolbar)
@@ -71,8 +77,6 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     @BindView(R.id.photoExplanation)
     TextView photoExplanation;
 
-    //@BindView(R.id.buttonAddPlace)
-    //Button addPlace;
 
     private CreateRatingViewModel model;
 
@@ -82,6 +86,10 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
         setContentView(R.layout.activity_rating);
         ButterKnife.bind(this);
         Nammu.init(this);
+
+        //Initialize Places SDK
+        Places.initialize(getApplicationContext(), PLACES_API_KEY);
+        PlacesClient placesClient = Places.createClient(this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -122,13 +130,6 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
             EasyImage.openChooserWithDocuments(CreateRatingActivity.this, "", 0);
         });
 
-        //Set listener for add place button click
-        /*addPlace.setOnClickListener(view -> {
-            List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
-
-            Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields).build(this);
-            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
-        });*/
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -198,7 +199,14 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
         } else if (requestCode == AUTOCOMPLETE_REQUEST_CODE){
             if(resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
-                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+                Log.e(TAG, "Place: " + place.getName() + ", " + place.getId());
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                ShowPlaceFragment fragment = ShowPlaceFragment.newInstance(place.getName());
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.commit();
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR){
                 Status status = Autocomplete.getStatusFromIntent(data);
                 Log.e(TAG, status.getStatusMessage());
@@ -265,7 +273,13 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void displayPlaceSelector() {
 
+        //Show place picker
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
+
+        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields).build(this);
+        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
     }
 }
+
