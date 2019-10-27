@@ -3,6 +3,7 @@ package ch.beerpro.presentation.details.createrating;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -23,8 +24,10 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,11 +48,13 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 import pl.tajchert.nammu.Nammu;
 import pl.tajchert.nammu.PermissionCallback;
 
-public class CreateRatingActivity extends AppCompatActivity {
+public class CreateRatingActivity extends AppCompatActivity implements PlaceFragment.OnFragmentInteractionListener {
 
     public static final String ITEM = "item";
     public static final String RATING = "rating";
     private static final String TAG = "CreateRatingActivity";
+
+    private static final int AUTOCOMPLETE_REQUEST_CODE = 1337;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -114,8 +119,6 @@ public class CreateRatingActivity extends AppCompatActivity {
 
         //Set listener for add place button click
         addPlace.setOnClickListener(view -> {
-            int AUTOCOMPLETE_REQUEST_CODE = 1;
-
             List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
 
             Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields).build(this);
@@ -188,7 +191,15 @@ public class CreateRatingActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
             handleCropResult(data);
         } else if (requestCode == AUTOCOMPLETE_REQUEST_CODE){
-
+            if(resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR){
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.e(TAG, status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED){
+                Log.i(TAG, "Place selection cancelled.");
+            }
         } else if (resultCode == UCrop.RESULT_ERROR) {
             handleCropError(data);
         }
@@ -246,5 +257,10 @@ public class CreateRatingActivity extends AppCompatActivity {
         model.saveRating(model.getItem(), rating, comment, model.getPhoto())
                 .addOnSuccessListener(task -> onBackPressed())
                 .addOnFailureListener(error -> Log.e(TAG, "Could not save rating", error));
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

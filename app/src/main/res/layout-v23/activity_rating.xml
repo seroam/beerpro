@@ -24,6 +24,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -157,6 +158,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ratingText" />
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -165,7 +167,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/separator5">
 
                 <Button
-                    android:id="@+id/buttonAddPlace2"
+                    android:id="@+id/buttonAddPlace"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -175,6 +177,7 @@
                     android:text="Ort Hinzufügen"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="10sp" />
+
                 <!--
                                 <View
                                     android:layout_width="1dp"
@@ -195,6 +198,16 @@
                 -->
             </LinearLayout>
 
+            <fragment
+                android:id="@+id/fragment"
+                android:name="ch.beerpro.presentation.details.createrating.PlaceFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                tools:layout="@layout/fragment_add_place"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
