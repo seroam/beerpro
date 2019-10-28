@@ -25,10 +25,31 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/pin"
+            android:layout_width="24sp"
+            android:layout_height="24sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/location_dropper"
+            app:layout_constraintTop_toBottomOf="@+id/avatar"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:id="@+id/place_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Place"
+            app:layout_constraintStart_toEndOf="@+id/pin"
+            app:layout_constraintTop_toBottomOf="@+id/avatar" />
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -86,7 +107,7 @@
             android:clickable="true"
             android:padding="8dp"
             android:tint="@android:color/darker_gray"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar"
             app:layout_constraintEnd_toStartOf="@+id/numLikes"
             app:srcCompat="@drawable/ic_thumb_up_black_24dp" />
 

@@ -83,6 +83,9 @@ public class MyRatingsRecyclerViewAdapter
         @BindView(R.id.numLikes)
         TextView numLikes;
 
+        @BindView(R.id.place_name)
+        TextView placeName;
+
         @BindView(R.id.details)
         Button details;
 
@@ -123,6 +126,8 @@ public class MyRatingsRecyclerViewAdapter
             GlideApp.with(itemView).load(item.getUserPhoto()).apply(new RequestOptions().circleCrop()).into(avatar);
 
             numLikes.setText(itemView.getResources().getString(R.string.fmt_num_ratings, item.getLikes().size()));
+
+            placeName.setText(item.getPlaceName());
 
             // don't need it here
             like.setVisibility(View.GONE);

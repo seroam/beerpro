@@ -102,6 +102,27 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/authorName"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <ImageView
+            android:id="@+id/pin"
+            android:layout_width="32sp"
+            android:layout_height="32sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/location_dropper"
+            app:layout_constraintTop_toBottomOf="@+id/avatar"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:id="@+id/place_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Place"
+            app:layout_constraintStart_toEndOf="@+id/pin"
+            app:layout_constraintTop_toBottomOf="@+id/avatar" />
+
         <View
             android:id="@+id/separator6"
             android:layout_width="match_parent"
@@ -111,7 +132,8 @@
             app:layout_constraintBottom_toTopOf="@+id/actionsLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addRatingExplanation" />
+            app:layout_constraintTop_toBottomOf="@+id/addRatingExplanation"
+            app:layout_constraintVertical_bias="0.5"/>
 
         <LinearLayout
             android:id="@+id/actionsLayout"
@@ -121,7 +143,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatar">
+            app:layout_constraintTop_toBottomOf="@+id/pin">
 
             <Button
                 android:id="@+id/details"

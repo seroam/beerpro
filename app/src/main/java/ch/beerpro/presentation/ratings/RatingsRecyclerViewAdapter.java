@@ -85,6 +85,9 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Pair<Rating, Wish>, 
         @BindView(R.id.numLikes)
         TextView numLikes;
 
+        @BindView(R.id.place_name)
+        TextView placeName;
+
         @BindView(R.id.details)
         Button details;
 
@@ -127,6 +130,8 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Pair<Rating, Wish>, 
             GlideApp.with(fragment).load(item.getUserPhoto()).apply(new RequestOptions().circleCrop()).into(avatar);
 
             numLikes.setText(itemView.getResources().getString(R.string.fmt_num_ratings, item.getLikes().size()));
+
+            placeName.setText(item.getPlaceName());
 
             if (item.getLikes().containsKey(user.getUid())) {
                 int color = fragment.getResources().getColor(R.color.colorPrimary);

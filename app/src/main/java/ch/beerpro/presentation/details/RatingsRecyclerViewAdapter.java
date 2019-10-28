@@ -73,6 +73,9 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Rating, RatingsRecyc
         @BindView(R.id.like)
         ImageView like;
 
+        @BindView(R.id.place_name)
+        TextView placeName;
+
         @BindView(R.id.photo)
         ImageView photo;
 
@@ -110,6 +113,8 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Rating, RatingsRecyc
             if (listener != null) {
                 like.setOnClickListener(v -> listener.onRatingLikedListener(item));
             }
+
+            placeName.setText((item.getPlaceName()));
         }
     }
 }
