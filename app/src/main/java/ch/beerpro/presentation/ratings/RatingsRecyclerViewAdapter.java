@@ -156,8 +156,8 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Pair<Rating, Wish>, 
                 like.setOnClickListener(v -> listener.onRatingLikedListener(item));
                 details.setOnClickListener(v -> listener.onMoreClickedListener(item));
                 wishlist.setOnClickListener(v -> listener.onWishClickedListener(item));
-                pin.setOnClickListener(v -> listener.onMapClickedListener(item.getLatLng()));
-                placeName.setOnClickListener(v -> listener.onMapClickedListener(item.getLatLng()));
+                pin.setOnClickListener(v -> listener.OnShowOnMapClicked(item));
+                placeName.setOnClickListener(v -> listener.OnShowOnMapClicked(item));
             }
         }
     }

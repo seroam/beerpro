@@ -2,7 +2,9 @@ package ch.beerpro.presentation.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,6 +16,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import ch.beerpro.R;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    private static final String TAG = "MapsActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +35,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
-        LatLng sydney = new LatLng(-33.852, 151.211);
-        googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15));
+        Intent intent = getIntent();
+        Log.e(TAG, "latitude: " + intent.getDoubleExtra("latitude", Double.MAX_VALUE) + "longitude: " + intent.getDoubleExtra("longitude", Double.MAX_VALUE));
+
+        LatLng place = new LatLng(intent.getDoubleExtra("latitude", 16.7714039), intent.getDoubleExtra("longitude", -3.0167342));
+        googleMap.addMarker(new MarkerOptions().position(place)
+                .title(intent.getStringExtra("name")));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 15));
     }
 }
 

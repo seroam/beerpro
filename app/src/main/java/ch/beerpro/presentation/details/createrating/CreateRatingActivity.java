@@ -86,7 +86,7 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
 
     private CreateRatingViewModel model;
     private String placeName = "";
-    private LatLng latLng = new LatLng(16.7714039,-3.0167342);
+    private LatLng latLng = new LatLng(90, 0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,8 +210,6 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
                 this.latLng = place.getLatLng();
 
-                //Log.e(TAG, "LatLng: " + this.latLng.latitude);
-
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -277,12 +275,14 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     private void saveRating() {
         float rating = addRatingBar.getRating();
         String comment = ratingText.getText().toString();
-        LatLng latLng2 = new LatLng(16.7714039,-3.0167342);
-        GeoPoint latLng = new GeoPoint(latLng2.latitude, latLng2.longitude);
+
+        GeoPoint geoPoint = new GeoPoint(this.latLng.latitude, this.latLng.longitude);
+
+        Log.e(TAG, "name=" + this.placeName + ", lat=" + this.latLng.latitude + ", lng=" + this.latLng.longitude);
 
         // TODO show a spinner!
         // TODO return the new rating to update the new average immediately
-        model.saveRating(model.getItem(), rating, comment, placeName, latLng, model.getPhoto())
+        model.saveRating(model.getItem(), rating, comment, placeName, geoPoint, model.getPhoto())
                 .addOnSuccessListener(task -> onBackPressed())
                 .addOnFailureListener(error -> Log.e(TAG, "Could not save rating", error));
     }
@@ -291,7 +291,7 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     public void displayPlaceSelector() {
 
         //Show place picker
-        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
+        List<Place.Field> fields = Arrays.asList(Place.Field.NAME, Place.Field.LAT_LNG);
 
         Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields).build(this);
         startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);

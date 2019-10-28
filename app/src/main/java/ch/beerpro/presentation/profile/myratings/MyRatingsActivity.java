@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.GeoPoint;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -84,8 +84,15 @@ public class MyRatingsActivity extends AppCompatActivity implements OnMyRatingIt
     }
 
     @Override
-    public void onMapClickedListener(GeoPoint geoPoint) {
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
+    public void OnShowOnMapClicked(Rating rating) {
+        if(rating.getLatLng().getLatitude() == 90 && rating.getLatLng().getLongitude() == 0){
+            Snackbar.make(recyclerView, "Kein Ort angegeben.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        } else {
+            Intent intent = new Intent(this, MapsActivity.class)
+                    .putExtra("latitude", rating.getLatLng().getLatitude())
+                    .putExtra("longitude", rating.getLatLng().getLongitude());
+            startActivity(intent);
+        }
     }
 }

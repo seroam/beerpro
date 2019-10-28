@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.firebase.firestore.GeoPoint;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,9 +91,17 @@ public class RatingsFragment extends Fragment
     }
 
     @Override
-    public void onMapClickedListener(GeoPoint latLng) {
-        Intent intent = new Intent(getActivity(), MapsActivity.class);
-        startActivity(intent);
+    public void OnShowOnMapClicked(Rating rating) {
+        if(rating.getLatLng().getLatitude() == 90 && rating.getLatLng().getLongitude() == 0){
+            Snackbar.make(getView(), "Kein Ort angegeben.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        } else {
+            Intent intent = new Intent(getActivity(), MapsActivity.class)
+                    .putExtra("name", rating.getPlaceName())
+                    .putExtra("latitude", rating.getLatLng().getLatitude())
+                    .putExtra("longitude", rating.getLatLng().getLongitude());
+            startActivity(intent);
+        }
     }
 
     @Override

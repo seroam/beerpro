@@ -10,5 +10,5 @@ public interface OnMyRatingItemInteractionListener {
 
     void onWishClickedListener(Rating item);
 
-    void onMapClickedListener(GeoPoint geoPoint);
+    void OnShowOnMapClicked(Rating rating);
 }

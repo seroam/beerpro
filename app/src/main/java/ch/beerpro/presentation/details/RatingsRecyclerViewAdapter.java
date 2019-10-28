@@ -1,7 +1,6 @@
 package ch.beerpro.presentation.details;
 
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,8 +118,8 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Rating, RatingsRecyc
             }
             if (listener != null) {
                 like.setOnClickListener(v -> listener.onRatingLikedListener(item));
-                pin.setOnClickListener(v -> listener.onMapClickedListener(item.getLatLng()));
-                placeName.setOnClickListener(v -> listener.onMapClickedListener(item.getLatLng()));
+                pin.setOnClickListener(v -> listener.OnShowOnMapClicked(item));
+                placeName.setOnClickListener(v -> listener.OnShowOnMapClicked(item));
             }
 
             placeName.setText((item.getPlaceName()));

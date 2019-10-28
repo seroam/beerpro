@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.firebase.firestore.GeoPoint;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,9 +153,17 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingChange
     }
 
     @Override
-    public void onMapClickedListener(GeoPoint geoPoint) {
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
+    public void OnShowOnMapClicked(Rating rating) {
+        if(rating.getLatLng().getLatitude() == 90 && rating.getLatLng().getLongitude() == 0){
+            Snackbar.make(recyclerView, "Kein Ort angegeben.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        } else {
+            Intent intent = new Intent(this, MapsActivity.class)
+                    .putExtra("latitude", rating.getLatLng().getLatitude())
+                    .putExtra("longitude", rating.getLatLng().getLongitude())
+                    .putExtra("name", rating.getPlaceName());
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.wishlist)
