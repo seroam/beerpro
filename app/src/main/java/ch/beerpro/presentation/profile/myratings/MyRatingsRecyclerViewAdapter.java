@@ -83,6 +83,9 @@ public class MyRatingsRecyclerViewAdapter
         @BindView(R.id.numLikes)
         TextView numLikes;
 
+        @BindView(R.id.pin)
+        ImageView pin;
+
         @BindView(R.id.place_name)
         TextView placeName;
 
@@ -143,6 +146,8 @@ public class MyRatingsRecyclerViewAdapter
             if (listener != null) {
                 details.setOnClickListener(v -> listener.onMoreClickedListener(item));
                 wishlist.setOnClickListener(v -> listener.onWishClickedListener(item));
+                pin.setOnClickListener(v -> listener.onMapClickedListener(item.getLatLng()));
+                placeName.setOnClickListener(v -> listener.onMapClickedListener(item.getLatLng()));
             }
         }
     }

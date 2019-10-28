@@ -85,6 +85,9 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Pair<Rating, Wish>, 
         @BindView(R.id.numLikes)
         TextView numLikes;
 
+        @BindView(R.id.pin)
+        ImageView pin;
+
         @BindView(R.id.place_name)
         TextView placeName;
 
@@ -153,6 +156,8 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Pair<Rating, Wish>, 
                 like.setOnClickListener(v -> listener.onRatingLikedListener(item));
                 details.setOnClickListener(v -> listener.onMoreClickedListener(item));
                 wishlist.setOnClickListener(v -> listener.onWishClickedListener(item));
+                pin.setOnClickListener(v -> listener.onMapClickedListener(item.getLatLng()));
+                placeName.setOnClickListener(v -> listener.onMapClickedListener(item.getLatLng()));
             }
         }
     }

@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.firebase.firestore.GeoPoint;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.MainViewModel;
 import ch.beerpro.presentation.details.DetailsActivity;
+import ch.beerpro.presentation.details.MapsActivity;
 
 public class RatingsFragment extends Fragment
         implements OnRatingsItemInteractionListener, SwipeRefreshLayout.OnRefreshListener {
@@ -85,6 +88,12 @@ public class RatingsFragment extends Fragment
     @Override
     public void onWishClickedListener(Rating item) {
         model.toggleItemInWishlist(item.getBeerId());
+    }
+
+    @Override
+    public void onMapClickedListener(GeoPoint latLng) {
+        Intent intent = new Intent(getActivity(), MapsActivity.class);
+        startActivity(intent);
     }
 
     @Override

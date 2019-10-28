@@ -1,5 +1,7 @@
 package ch.beerpro.presentation.details;
 
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +26,16 @@ import ch.beerpro.domain.models.Rating;
 import ch.beerpro.presentation.utils.EntityDiffItemCallback;
 
 
+
+
 public class RatingsRecyclerViewAdapter extends ListAdapter<Rating, RatingsRecyclerViewAdapter.ViewHolder> {
 
     private static final EntityDiffItemCallback<Rating> DIFF_CALLBACK = new EntityDiffItemCallback<>();
 
-    private final OnRatingLikedListener listener;
+    private final OnRatingChangedListener listener;
     private FirebaseUser user;
 
-    public RatingsRecyclerViewAdapter(OnRatingLikedListener listener, FirebaseUser user) {
+    public RatingsRecyclerViewAdapter(OnRatingChangedListener listener, FirebaseUser user) {
         super(DIFF_CALLBACK);
         this.listener = listener;
         this.user = user;
@@ -73,6 +77,9 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Rating, RatingsRecyc
         @BindView(R.id.like)
         ImageView like;
 
+        @BindView(R.id.pin)
+        ImageView pin;
+
         @BindView(R.id.place_name)
         TextView placeName;
 
@@ -84,7 +91,7 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Rating, RatingsRecyc
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(Rating item, OnRatingLikedListener listener) {
+        void bind(Rating item, OnRatingChangedListener listener) {
             comment.setText(item.getComment());
 
             ratingBar.setNumStars(5);
@@ -112,6 +119,8 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Rating, RatingsRecyc
             }
             if (listener != null) {
                 like.setOnClickListener(v -> listener.onRatingLikedListener(item));
+                pin.setOnClickListener(v -> listener.onMapClickedListener(item.getLatLng()));
+                placeName.setOnClickListener(v -> listener.onMapClickedListener(item.getLatLng()));
             }
 
             placeName.setText((item.getPlaceName()));

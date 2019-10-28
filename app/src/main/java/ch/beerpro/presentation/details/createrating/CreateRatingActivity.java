@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -33,11 +34,14 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.GeoPoint;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import butterknife.BindView;
@@ -77,10 +81,12 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     @BindView(R.id.photoExplanation)
     TextView photoExplanation;
 
-    private String placeName = "";
+
 
 
     private CreateRatingViewModel model;
+    private String placeName = "";
+    private LatLng latLng = new LatLng(16.7714039,-3.0167342);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,7 +207,10 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
         } else if (requestCode == AUTOCOMPLETE_REQUEST_CODE){
             if(resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
-                Log.e(TAG, "Place: " + place.getName() + ", " + place.getId());
+                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+                this.latLng = place.getLatLng();
+
+                //Log.e(TAG, "LatLng: " + this.latLng.latitude);
 
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -268,10 +277,12 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     private void saveRating() {
         float rating = addRatingBar.getRating();
         String comment = ratingText.getText().toString();
+        LatLng latLng2 = new LatLng(16.7714039,-3.0167342);
+        GeoPoint latLng = new GeoPoint(latLng2.latitude, latLng2.longitude);
 
         // TODO show a spinner!
         // TODO return the new rating to update the new average immediately
-        model.saveRating(model.getItem(), rating, comment, placeName, model.getPhoto())
+        model.saveRating(model.getItem(), rating, comment, placeName, latLng, model.getPhoto())
                 .addOnSuccessListener(task -> onBackPressed())
                 .addOnFailureListener(error -> Log.e(TAG, "Could not save rating", error));
     }

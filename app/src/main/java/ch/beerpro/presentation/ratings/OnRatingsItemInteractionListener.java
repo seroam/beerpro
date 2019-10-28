@@ -1,5 +1,7 @@
 package ch.beerpro.presentation.ratings;
 
+import com.google.firebase.firestore.GeoPoint;
+
 import ch.beerpro.domain.models.Rating;
 
 public interface OnRatingsItemInteractionListener {
@@ -8,4 +10,6 @@ public interface OnRatingsItemInteractionListener {
     void onMoreClickedListener(Rating rating);
 
     void onWishClickedListener(Rating item);
+
+    void onMapClickedListener(GeoPoint latLng);
 }

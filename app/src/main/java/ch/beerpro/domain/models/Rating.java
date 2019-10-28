@@ -2,7 +2,9 @@ package ch.beerpro.domain.models;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.util.Date;
 import java.util.Map;
@@ -25,6 +27,7 @@ public class Rating implements Entity {
     private float rating;
     private String comment;
     private String placeName;
+    private GeoPoint latLng;
 
     /**
      * We use a Map instead of an Array to be able to query it.
@@ -34,7 +37,7 @@ public class Rating implements Entity {
     private Map<String, Boolean> likes;
     private Date creationDate;
 
-    public Rating(String id, String beerId, String beerName, String userId, String userName, String userPhoto, String photo, float rating, String comment, String placeName, Map<String, Boolean> likes, Date creationDate) {
+    public Rating(String id, String beerId, String beerName, String userId, String userName, String userPhoto, String photo, float rating, String comment, String placeName, GeoPoint latLng, Map<String, Boolean> likes, Date creationDate) {
         this.id = id;
         this.beerId = beerId;
         this.beerName = beerName;
@@ -45,6 +48,7 @@ public class Rating implements Entity {
         this.rating = rating;
         this.comment = comment;
         this.placeName = placeName;
+        this.latLng = latLng;
         this.likes = likes;
         this.creationDate = creationDate;
     }
@@ -88,9 +92,9 @@ public class Rating implements Entity {
         return this.comment;
     }
 
-    public String getPlaceName(){
-        return this.placeName;
-    }
+    public String getPlaceName(){ return this.placeName; }
+
+    public GeoPoint getLatLng(){ return this.latLng; }
 
     public Map<String, Boolean> getLikes() {
         return this.likes;
@@ -139,6 +143,8 @@ public class Rating implements Entity {
     public void setPlaceName(String placeName){
         this.placeName = placeName;
     }
+
+    public void setLatLng(GeoPoint latLng) { this.latLng = latLng; }
 
     public void setLikes(Map<String, Boolean> likes) {
         this.likes = likes;
@@ -189,6 +195,10 @@ public class Rating implements Entity {
         final Object other$placeName = other.getPlaceName();
         if (this$placeName == null ? other$placeName != null : !this$placeName.equals(other$placeName))
             return false;
+        final Object this$latLng = this.getLatLng();
+        final Object other$latLng = other.getLatLng();
+        if (this$latLng == null ? other$latLng != null : !this$latLng.equals(other$latLng))
+            return false;
         final Object this$likes = this.getLikes();
         final Object other$likes = other.getLikes();
         if (this$likes == null ? other$likes != null : !this$likes.equals(other$likes))
@@ -224,6 +234,8 @@ public class Rating implements Entity {
         result = result * PRIME + ($comment == null ? 43 : $comment.hashCode());
         final Object $placeName = this.getPlaceName();
         result = result * PRIME + ($placeName == null ? 43 : $placeName.hashCode());
+        final Object $latLng = this.getLatLng();
+        result = result * PRIME + ($latLng == null ? 43 : $latLng.hashCode());
         final Object $likes = this.getLikes();
         result = result * PRIME + ($likes == null ? 43 : $likes.hashCode());
         final Object $creationDate = this.getCreationDate();
@@ -233,6 +245,6 @@ public class Rating implements Entity {
 
     @NonNull
     public String toString() {
-        return "Rating(id=" + this.getId() + ", beerId=" + this.getBeerId() + ", beerName=" + this.getBeerName() + ", userId=" + this.getUserId() + ", userName=" + this.getUserName() + ", userPhoto=" + this.getUserPhoto() + ", photo=" + this.getPhoto() + ", rating=" + this.getRating() + ", comment=" + this.getComment() + ", placeName=" + this.getPlaceName() + ", likes=" + this.getLikes() + ", creationDate=" + this.getCreationDate() + ")";
+        return "Rating(id=" + this.getId() + ", beerId=" + this.getBeerId() + ", beerName=" + this.getBeerName() + ", userId=" + this.getUserId() + ", userName=" + this.getUserName() + ", userPhoto=" + this.getUserPhoto() + ", photo=" + this.getPhoto() + ", rating=" + this.getRating() + ", comment=" + this.getComment() + ", placeName=" + this.getPlaceName() + ", latLng=" + this.getLatLng().toString() + ", likes=" + this.getLikes() + ", creationDate=" + this.getCreationDate() + ")";
     }
 }

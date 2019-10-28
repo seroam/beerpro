@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ import ch.beerpro.presentation.details.createrating.CreateRatingActivity;
 
 import static ch.beerpro.presentation.utils.DrawableHelpers.setDrawableTint;
 
-public class DetailsActivity extends AppCompatActivity implements OnRatingLikedListener {
+public class DetailsActivity extends AppCompatActivity implements OnRatingChangedListener {
 
     public static final String ITEM_ID = "item_id";
     private static final String TAG = "DetailsActivity";
@@ -149,6 +150,12 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
     @Override
     public void onRatingLikedListener(Rating rating) {
         model.toggleLike(rating);
+    }
+
+    @Override
+    public void onMapClickedListener(GeoPoint geoPoint) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.wishlist)

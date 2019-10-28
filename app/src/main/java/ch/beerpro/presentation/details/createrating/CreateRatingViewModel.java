@@ -5,11 +5,13 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -44,7 +46,7 @@ public class CreateRatingViewModel extends ViewModel {
         this.photo = photo;
     }
 
-    public Task<Rating> saveRating(Beer item, float rating, String comment, String placeName, Uri localPhotoUri) {
+    public Task<Rating> saveRating(Beer item, float rating, String comment, String placeName, GeoPoint latLng, Uri localPhotoUri) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
@@ -62,7 +64,7 @@ public class CreateRatingViewModel extends ViewModel {
             }
 
             Rating newRating = new Rating(null, item.getId(), item.getName(), user.getUid(), user.getDisplayName(),
-                    user.getPhotoUrl().toString(), photoUrl, rating, comment, placeName, Collections.emptyMap(), new Date());
+                    user.getPhotoUrl().toString(), photoUrl, rating, comment, placeName, latLng, Collections.emptyMap(), new Date());
             Log.i(TAG, "Adding new rating: " + newRating.toString());
             return FirebaseFirestore.getInstance().collection("ratings").add(newRating);
 

@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.GeoPoint;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -19,6 +21,7 @@ import ch.beerpro.R;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.details.DetailsActivity;
+import ch.beerpro.presentation.details.MapsActivity;
 
 public class MyRatingsActivity extends AppCompatActivity implements OnMyRatingItemInteractionListener {
 
@@ -78,5 +81,11 @@ public class MyRatingsActivity extends AppCompatActivity implements OnMyRatingIt
     @Override
     public void onWishClickedListener(Rating item) {
         model.toggleItemInWishlist(item.getBeerId());
+    }
+
+    @Override
+    public void onMapClickedListener(GeoPoint geoPoint) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 }

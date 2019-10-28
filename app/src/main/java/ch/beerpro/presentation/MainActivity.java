@@ -1,5 +1,6 @@
 package ch.beerpro.presentation;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,9 +21,11 @@ import com.google.android.libraries.places.api.Places;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ch.beerpro.R;
+import ch.beerpro.presentation.details.MapsActivity;
 import ch.beerpro.presentation.explore.BeerCategoriesFragment;
 import ch.beerpro.presentation.explore.BeerManufacturersFragment;
 import ch.beerpro.presentation.explore.ExploreFragment;
+import ch.beerpro.presentation.explore.search.SearchActivity;
 import ch.beerpro.presentation.profile.ProfileFragment;
 import ch.beerpro.presentation.ratings.RatingsFragment;
 import ch.beerpro.presentation.splash.SplashScreenActivity;
@@ -67,8 +70,12 @@ public class MainActivity extends AppCompatActivity
          * Just a placeholder for your own ideas...
          * */
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        fab.setOnClickListener(v -> {
+                Intent intent = new Intent(this, MapsActivity.class);
+                startActivity(intent);
+                });
+        /*fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+         *        .setAction("Action", null).show());*/
     }
 
     private void setupViewPager(ViewPager viewPager, TabLayout tabLayout) {
