@@ -21,7 +21,7 @@ import ch.beerpro.R;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.details.DetailsActivity;
-import ch.beerpro.presentation.details.MapsActivity;
+import ch.beerpro.presentation.details.maps.MapsActivity;
 
 public class MyRatingsActivity extends AppCompatActivity implements OnMyRatingItemInteractionListener {
 

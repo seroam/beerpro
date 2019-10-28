@@ -1,4 +1,4 @@
-package ch.beerpro.presentation.details;
+package ch.beerpro.presentation.details.maps;
 
 import androidx.appcompat.app.AppCompatActivity;
 

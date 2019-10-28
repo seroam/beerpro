@@ -35,6 +35,7 @@ import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.details.createrating.CreateRatingActivity;
+import ch.beerpro.presentation.details.maps.MapsActivity;
 
 import static ch.beerpro.presentation.utils.DrawableHelpers.setDrawableTint;
 

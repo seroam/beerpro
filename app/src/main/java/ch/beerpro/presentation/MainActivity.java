@@ -1,6 +1,5 @@
 package ch.beerpro.presentation;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,20 +11,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.libraries.places.api.Places;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ch.beerpro.R;
-import ch.beerpro.presentation.details.MapsActivity;
+import ch.beerpro.presentation.details.maps.MapsActivity;
 import ch.beerpro.presentation.explore.BeerCategoriesFragment;
 import ch.beerpro.presentation.explore.BeerManufacturersFragment;
 import ch.beerpro.presentation.explore.ExploreFragment;
-import ch.beerpro.presentation.explore.search.SearchActivity;
 import ch.beerpro.presentation.profile.ProfileFragment;
 import ch.beerpro.presentation.ratings.RatingsFragment;
 import ch.beerpro.presentation.splash.SplashScreenActivity;

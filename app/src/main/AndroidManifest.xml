@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".presentation.details.MapsActivity"></activity>
+        <activity android:name=".presentation.details.maps.MapsActivity"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
