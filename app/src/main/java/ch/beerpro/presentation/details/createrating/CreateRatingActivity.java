@@ -77,6 +77,8 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     @BindView(R.id.photoExplanation)
     TextView photoExplanation;
 
+    private String placeName = "";
+
 
     private CreateRatingViewModel model;
 
@@ -207,6 +209,7 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
                 ShowPlaceFragment fragment = ShowPlaceFragment.newInstance(place.getName());
                 fragmentTransaction.replace(R.id.fragment_container, fragment);
                 fragmentTransaction.commit();
+                this.placeName = place.getName();
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR){
                 Status status = Autocomplete.getStatusFromIntent(data);
                 Log.e(TAG, status.getStatusMessage());
@@ -265,9 +268,10 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     private void saveRating() {
         float rating = addRatingBar.getRating();
         String comment = ratingText.getText().toString();
+
         // TODO show a spinner!
         // TODO return the new rating to update the new average immediately
-        model.saveRating(model.getItem(), rating, comment, model.getPhoto())
+        model.saveRating(model.getItem(), rating, comment, placeName, model.getPhoto())
                 .addOnSuccessListener(task -> onBackPressed())
                 .addOnFailureListener(error -> Log.e(TAG, "Could not save rating", error));
     }
