@@ -61,6 +61,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comment" />
 
+        <TextView
+            android:id="@+id/text_overall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Overall"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
+
         <RatingBar
             android:id="@+id/ratingBarBitterness"
             style="?android:attr/ratingBarStyleSmall"
@@ -75,6 +86,17 @@
             android:theme="@style/RatingBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+        <TextView
+            android:id="@+id/text_bitterness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Bitterness"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBarBitterness"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
 
         <ImageView
             android:id="@+id/avatar"
