@@ -5,7 +5,6 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
