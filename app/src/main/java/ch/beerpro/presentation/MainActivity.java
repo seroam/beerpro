@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
@@ -65,12 +66,8 @@ public class MainActivity extends AppCompatActivity
          * Just a placeholder for your own ideas...
          * */
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(v -> {
-                Intent intent = new Intent(this, MapsActivity.class);
-                startActivity(intent);
-                });
-        /*fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-         *        .setAction("Action", null).show());*/
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
     }
 
     private void setupViewPager(ViewPager viewPager, TabLayout tabLayout) {
