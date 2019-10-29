@@ -1,9 +1,11 @@
 package ch.beerpro.presentation.details.createrating;
 
+import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,9 +27,13 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
@@ -68,6 +74,8 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     private static final String PLACES_API_KEY = "AIzaSyAkTuWEyt4zP0aR-IZIWnvDWBm3cFaCjhc";
 
     private static final int AUTOCOMPLETE_REQUEST_CODE = 1337;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -106,6 +114,9 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
         //Initialize Places SDK
         Places.initialize(getApplicationContext(), PLACES_API_KEY);
         PlacesClient placesClient = Places.createClient(this);
+
+        //Initialize location provider client
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -305,7 +316,18 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
         //Show place picker
         List<Place.Field> fields = Arrays.asList(Place.Field.NAME, Place.Field.LAT_LNG);
 
-        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields).build(this);
+        int permissionCheck =
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Log.e(TAG, "no location");
+        } else {
+            Log.e(TAG, "with location");
+        }
+
+        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
+                .setHint("Search for a place")
+                .setLocationBias(null)
+                .build(this);
         startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
     }
 
