@@ -25,6 +25,7 @@ public class Rating implements Entity {
     private String userPhoto;
     private String photo;
     private float rating;
+    private float bitterness;
     private String comment;
     private String placeName;
     private GeoPoint latLng;
@@ -37,7 +38,7 @@ public class Rating implements Entity {
     private Map<String, Boolean> likes;
     private Date creationDate;
 
-    public Rating(String id, String beerId, String beerName, String userId, String userName, String userPhoto, String photo, float rating, String comment, String placeName, GeoPoint latLng, Map<String, Boolean> likes, Date creationDate) {
+    public Rating(String id, String beerId, String beerName, String userId, String userName, String userPhoto, String photo, float rating, float bitterness, String comment, String placeName, GeoPoint latLng, Map<String, Boolean> likes, Date creationDate) {
         this.id = id;
         this.beerId = beerId;
         this.beerName = beerName;
@@ -46,6 +47,7 @@ public class Rating implements Entity {
         this.userPhoto = userPhoto;
         this.photo = photo;
         this.rating = rating;
+        this.bitterness = bitterness;
         this.comment = comment;
         this.placeName = placeName;
         this.latLng = latLng;
@@ -87,6 +89,8 @@ public class Rating implements Entity {
     public float getRating() {
         return this.rating;
     }
+
+    public float getBitterness(){ return this.bitterness; }
 
     public String getComment() {
         return this.comment;
@@ -135,6 +139,8 @@ public class Rating implements Entity {
     public void setRating(float rating) {
         this.rating = rating;
     }
+
+    public void setBitterness(float bitterness) { this.bitterness = bitterness; }
 
     public void setComment(String comment) {
         this.comment = comment;
@@ -187,6 +193,7 @@ public class Rating implements Entity {
         if (this$photo == null ? other$photo != null : !this$photo.equals(other$photo))
             return false;
         if (Float.compare(this.getRating(), other.getRating()) != 0) return false;
+        if (Float.compare(this.getBitterness(), other.getBitterness()) != 0) return false;
         final Object this$comment = this.getComment();
         final Object other$comment = other.getComment();
         if (this$comment == null ? other$comment != null : !this$comment.equals(other$comment))
@@ -230,6 +237,7 @@ public class Rating implements Entity {
         final Object $photo = this.getPhoto();
         result = result * PRIME + ($photo == null ? 43 : $photo.hashCode());
         result = result * PRIME + Float.floatToIntBits(this.getRating());
+        result = result * PRIME + Float.floatToIntBits(this.getBitterness());
         final Object $comment = this.getComment();
         result = result * PRIME + ($comment == null ? 43 : $comment.hashCode());
         final Object $placeName = this.getPlaceName();
@@ -245,6 +253,6 @@ public class Rating implements Entity {
 
     @NonNull
     public String toString() {
-        return "Rating(id=" + this.getId() + ", beerId=" + this.getBeerId() + ", beerName=" + this.getBeerName() + ", userId=" + this.getUserId() + ", userName=" + this.getUserName() + ", userPhoto=" + this.getUserPhoto() + ", photo=" + this.getPhoto() + ", rating=" + this.getRating() + ", comment=" + this.getComment() + ", placeName=" + this.getPlaceName() + ", latLng=" + this.getLatLng().toString() + ", likes=" + this.getLikes() + ", creationDate=" + this.getCreationDate() + ")";
+        return "Rating(id=" + this.getId() + ", beerId=" + this.getBeerId() + ", beerName=" + this.getBeerName() + ", userId=" + this.getUserId() + ", userName=" + this.getUserName() + ", userPhoto=" + this.getUserPhoto() + ", photo=" + this.getPhoto() + ", rating=" + this.getRating() + ", bitterness=" + this.getBitterness() + ", comment=" + this.getComment() + ", placeName=" + this.getPlaceName() + ", latLng=" + this.getLatLng().toString() + ", likes=" + this.getLikes() + ", creationDate=" + this.getCreationDate() + ")";
     }
 }

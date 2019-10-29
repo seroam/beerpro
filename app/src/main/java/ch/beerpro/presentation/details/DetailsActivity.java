@@ -76,6 +76,9 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingChange
     @BindView(R.id.addRatingBar)
     RatingBar addRatingBar;
 
+    @BindView(R.id.addRatingBarBitterness)
+    RatingBar addRatingBarBitterness;
+
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -112,6 +115,7 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingChange
 
         recyclerView.setAdapter(adapter);
         addRatingBar.setOnRatingBarChangeListener(this::addNewRating);
+        addRatingBarBitterness.setOnRatingBarChangeListener(this::addNewRating);
     }
 
     private void addNewRating(RatingBar ratingBar, float v, boolean b) {

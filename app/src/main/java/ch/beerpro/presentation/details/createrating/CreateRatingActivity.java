@@ -69,6 +69,9 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
     @BindView(R.id.addRatingBar)
     RatingBar addRatingBar;
 
+    @BindView(R.id.addRatingBarBitterness)
+    RatingBar addRatingBarBitterness;
+
     @BindView(R.id.photo)
     ImageView photo;
 
@@ -274,15 +277,14 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
 
     private void saveRating() {
         float rating = addRatingBar.getRating();
+        float bitterness = addRatingBarBitterness.getRating();
         String comment = ratingText.getText().toString();
 
         GeoPoint geoPoint = new GeoPoint(this.latLng.latitude, this.latLng.longitude);
 
-        Log.e(TAG, "name=" + this.placeName + ", lat=" + this.latLng.latitude + ", lng=" + this.latLng.longitude);
-
         // TODO show a spinner!
         // TODO return the new rating to update the new average immediately
-        model.saveRating(model.getItem(), rating, comment, placeName, geoPoint, model.getPhoto())
+        model.saveRating(model.getItem(), rating, bitterness, comment, placeName, geoPoint, model.getPhoto())
                 .addOnSuccessListener(task -> onBackPressed())
                 .addOnFailureListener(error -> Log.e(TAG, "Could not save rating", error));
     }
