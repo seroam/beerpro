@@ -46,7 +46,7 @@ public class CreateRatingViewModel extends ViewModel {
         this.photo = photo;
     }
 
-    public Task<Rating> saveRating(Beer item, float rating, String comment, String placeName, GeoPoint latLng, Uri localPhotoUri) {
+    public Task<Rating> saveRating(Beer item, float rating, float bitterness, String comment, String placeName, GeoPoint latLng, Uri localPhotoUri) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
@@ -64,7 +64,7 @@ public class CreateRatingViewModel extends ViewModel {
             }
 
             Rating newRating = new Rating(null, item.getId(), item.getName(), user.getUid(), user.getDisplayName(),
-                    user.getPhotoUrl().toString(), photoUrl, rating, comment, placeName, latLng, Collections.emptyMap(), new Date());
+                    user.getPhotoUrl().toString(), photoUrl, rating, bitterness,  comment, placeName, latLng, Collections.emptyMap(), new Date());
             Log.i(TAG, "Adding new rating: " + newRating.toString());
             return FirebaseFirestore.getInstance().collection("ratings").add(newRating);
 

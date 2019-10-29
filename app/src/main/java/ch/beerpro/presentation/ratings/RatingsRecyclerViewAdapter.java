@@ -76,6 +76,9 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Pair<Rating, Wish>, 
         @BindView(R.id.ratingBar)
         RatingBar ratingBar;
 
+        @BindView(R.id.ratingBarBitterness)
+        RatingBar ratingBarBitterness;
+
         @BindView(R.id.authorName)
         TextView authorName;
 
@@ -116,6 +119,8 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Pair<Rating, Wish>, 
 
             ratingBar.setNumStars(5);
             ratingBar.setRating(item.getRating());
+            ratingBarBitterness.setRating(item.getBitterness());
+
             String formattedDate =
                     DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT).format(item.getCreationDate());
             date.setText(formattedDate);

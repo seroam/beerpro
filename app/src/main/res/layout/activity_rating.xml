@@ -86,6 +86,36 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
+            <RatingBar
+                android:id="@+id/addRatingBarBitterness"
+                style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="0.5"
+                android:theme="@style/RatingBar"
+                android:transitionName="rating"
+
+                app:layout_constraintStart_toStartOf="@id/addRatingBar"
+                app:layout_constraintTop_toBottomOf="@+id/addRatingBar"
+                />
+
+
+            <TextView
+                android:id="@+id/bitternessLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:text="Bitterkeit"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@id/addRatingBarBitterness"
+                app:layout_constraintTop_toTopOf="@+id/addRatingBarBitterness" />
 
             <TextView
                 android:id="@+id/addRatingExplanation2"
@@ -96,9 +126,10 @@
                 android:text="Bewertung durch Ziehen der Sterne verändern"
                 android:textSize="10sp"
                 android:textStyle="italic"
+                android:layout_marginTop="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addRatingBar" />
+                app:layout_constraintTop_toBottomOf="@+id/addRatingBarBitterness" />
 
             <View
                 android:id="@+id/separator4"

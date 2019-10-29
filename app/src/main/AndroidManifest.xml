@@ -17,7 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".presentation.details.maps.MapsActivity"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -56,6 +55,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.details.DetailsActivity" />
+        </activity>
+        <activity
+            android:name=".presentation.details.maps.MapsActivity"
+            android:parentActivityName=".presentation.details.createrating.CreateRatingActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.details.createrating.CreateRatingActivity" />
         </activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

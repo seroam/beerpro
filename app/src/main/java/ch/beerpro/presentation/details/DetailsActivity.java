@@ -4,6 +4,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -76,6 +77,9 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingChange
     @BindView(R.id.addRatingBar)
     RatingBar addRatingBar;
 
+    @BindView(R.id.addRatingBarBitterness)
+    RatingBar addRatingBarBitterness;
+
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -112,12 +116,23 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingChange
 
         recyclerView.setAdapter(adapter);
         addRatingBar.setOnRatingBarChangeListener(this::addNewRating);
+        addRatingBarBitterness.setOnRatingBarChangeListener(this::addNewRating);
     }
 
     private void addNewRating(RatingBar ratingBar, float v, boolean b) {
+
         Intent intent = new Intent(this, CreateRatingActivity.class);
         intent.putExtra(CreateRatingActivity.ITEM, model.getBeer().getValue());
         intent.putExtra(CreateRatingActivity.RATING, v);
+
+        if(ratingBar == this.addRatingBar){
+            intent.putExtra(CreateRatingActivity.RATING_TYPE, CreateRatingActivity.RATING_T.OVERALL);
+        } else if(ratingBar == this.addRatingBarBitterness){
+            intent.putExtra(CreateRatingActivity.RATING_TYPE, CreateRatingActivity.RATING_T.BITTERNESS);
+        } else {
+            Log.e(TAG, "Unknown rating type: " + ratingBar.toString());
+        }
+
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, addRatingBar, "rating");
         startActivity(intent, options.toBundle());
     }
