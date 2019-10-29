@@ -58,6 +58,10 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
 
     public static final String ITEM = "item";
     public static final String RATING = "rating";
+    public static final String RATING_TYPE = "rating_t";
+    public enum RATING_T{
+        OVERALL, BITTERNESS
+    }
     private static final String TAG = "CreateRatingActivity";
 
     private static final String PLACES_API_KEY = "AIzaSyAkTuWEyt4zP0aR-IZIWnvDWBm3cFaCjhc";
@@ -108,11 +112,16 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
 
         Beer item = (Beer) getIntent().getExtras().getSerializable(ITEM);
         float rating = getIntent().getExtras().getFloat(RATING);
+        RATING_T rating_t = (RATING_T)getIntent().getExtras().getSerializable(RATING_TYPE);
 
         model = ViewModelProviders.of(this).get(CreateRatingViewModel.class);
         model.setItem(item);
 
-        addRatingBar.setRating(rating);
+        if( rating_t == RATING_T.OVERALL) {
+            addRatingBar.setRating(rating);
+        } else if ( rating_t == RATING_T.BITTERNESS){
+            addRatingBarBitterness.setRating(rating);
+        }
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
