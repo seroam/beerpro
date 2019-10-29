@@ -49,6 +49,7 @@ import butterknife.ButterKnife;
 import ch.beerpro.GlideApp;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
+import ch.beerpro.presentation.details.DetailsActivity;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 import pl.tajchert.nammu.Nammu;
@@ -295,6 +296,13 @@ public class CreateRatingActivity extends AppCompatActivity implements AddPlaceF
 
         Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields).build(this);
         startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+    }
+
+    @Override
+    public Intent getParentActivityIntent(){
+        Intent intent = super.getParentActivityIntent();
+        intent.putExtra(DetailsActivity.ITEM_ID, ((Beer) getIntent().getExtras().getSerializable(ITEM)).getId());
+        return intent;
     }
 }
 
